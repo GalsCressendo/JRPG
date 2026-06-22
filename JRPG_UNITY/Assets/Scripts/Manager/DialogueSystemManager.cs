@@ -65,8 +65,6 @@ namespace GalsCressendo.JRPG
 
             conversationEndedHandler = (transform) =>
             {
-                // The conversation has finished, so neither callback is needed
-                // anymore. Unregister before invoking user events for safety.
                 UnregisterDialogueEvents();
                 data.ConversationFinish();
             };
