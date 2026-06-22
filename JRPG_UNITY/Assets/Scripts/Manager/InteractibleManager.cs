@@ -25,13 +25,25 @@ public class InteractibleManager : MonoBehaviour
     public void OnTargetInteractible(InteractibleComponent interactible)
     {
         ActiveInteractible = interactible;
+
+        ActiveInteractible.SetActiveInteractible(true);
     }
 
     public void OnUntargetInteractible(InteractibleComponent interactible)
     {
         if(ActiveInteractible == interactible)
         {
+            ActiveInteractible.SetActiveInteractible(false);
+
             ActiveInteractible = null;
+        }
+    }
+
+    public void TriggerInteraction(InteractibleComponent source)
+    {
+        if(ActiveInteractible == source)
+        {
+            ActiveInteractible.Interact();
         }
     }
 
