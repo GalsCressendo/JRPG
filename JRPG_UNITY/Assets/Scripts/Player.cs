@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +7,7 @@ public class Player : MonoBehaviour
 {
     private InputAction playerMoveAction;
     private InputAction playerLookAction;
+    private InputAction playerInteractAction;
     private Vector2 playerMoveAmount;
     private Vector2 playerLookAmount;
 
@@ -38,6 +41,7 @@ public class Player : MonoBehaviour
         InputActionMap playerActionMap = InputActions.FindActionMap("Player", true);
         playerMoveAction = playerActionMap.FindAction("Move", true);
         playerLookAction = playerActionMap.FindAction("Look", true);
+        playerInteractAction = playerActionMap.FindAction("Jump", true);
 
         cameraYaw = playerCamera.eulerAngles.y;
         cameraPitch = NormalizeAngle(playerCamera.eulerAngles.x);
@@ -53,6 +57,11 @@ public class Player : MonoBehaviour
     {
         playerMoveAmount = playerMoveAction.ReadValue<Vector2>();
         playerLookAmount = playerLookAction.ReadValue<Vector2>();
+
+        if (playerInteractAction.WasPressedThisFrame())
+        {
+            Interact();
+        }
 
         ReadCameraLook();
         PlayerMoveAndRotate();
@@ -93,5 +102,12 @@ public class Player : MonoBehaviour
     private static float NormalizeAngle(float angle)
     {
         return angle > 180f ? angle - 360f : angle;
+    }
+
+    private async void Interact()
+    {
+        await UniTask.WaitUntil(() => InteractibleManager.Instance != null);
+
+        InteractibleManager.Instance.TriggerInteraction();
     }
 }

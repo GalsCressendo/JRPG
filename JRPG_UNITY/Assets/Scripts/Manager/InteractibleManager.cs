@@ -39,9 +39,9 @@ public class InteractibleManager : MonoBehaviour
         }
     }
 
-    public void TriggerInteraction(InteractibleComponent source)
+    public void TriggerInteraction()
     {
-        if(ActiveInteractible == source)
+        if(ActiveInteractible != null)
         {
             ActiveInteractible.Interact();
         }
