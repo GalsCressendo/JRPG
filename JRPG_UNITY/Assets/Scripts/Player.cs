@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionAsset InputActions;
     [SerializeField] CharacterController playerCharacterController;
 
+    [SerializeField] Animator animator;
+    [SerializeField] private float animationDampTime = 0.1f;
+    private const string MOVE_ANIM_PARAM = "moveSpeed";
+
     private float turnSmoothingVelocity;
     private float cameraYaw;
     private float cameraPitch;
@@ -66,6 +70,8 @@ public class Player : MonoBehaviour
         ReadCameraLook();
         PlayerMoveAndRotate();
         ApplyCameraRotation();
+
+        animator?.SetFloat(MOVE_ANIM_PARAM, Mathf.Clamp01(playerMoveAmount.magnitude), animationDampTime,Time.deltaTime);
     }
 
     private void ReadCameraLook()
