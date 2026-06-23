@@ -346,13 +346,13 @@ MonoBehaviour:
       convertPipesToLineBreaks: 1
       informSequenceStartAndEnd: 0
     cameraSettings:
-      sequencerCamera: {fileID: 0}
+      sequencerCamera: {fileID: 200000, guid: d8d9f10d0b5a4ae9a63c45d80b760f11, type: 3}
       alternateCameraObject: {fileID: 0}
-      cameraAngles: {fileID: 0}
-      cameraEasing: 0
+      cameraAngles: {fileID: 100000, guid: a3c7e3566af44a61a1031c0799df7c22, type: 3}
+      cameraEasing: 3
       keepCameraPositionAtConversationEnd: 0
       showSubtitleOnEmptyContinue: 0
-      defaultSequence: Delay({{end}})
+      defaultSequence: Camera(Closeup, speaker, 0.8); Delay({{end}})
       defaultPlayerSequence: 
       defaultResponseMenuSequence: 
       entrytagFormat: 0

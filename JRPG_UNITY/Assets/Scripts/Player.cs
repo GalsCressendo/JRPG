@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -30,6 +31,10 @@ public class Player : MonoBehaviour
     private float cameraYaw;
     private float cameraPitch;
 
+    public float CurrentMovementSpeed { get; private set; }
+
+    public static Player Instance { get; private set; }
+
     private void OnEnable()
     {
         InputActions.FindActionMap("Player").Enable();
@@ -42,6 +47,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+
         InputActionMap playerActionMap = InputActions.FindActionMap("Player", true);
         playerMoveAction = playerActionMap.FindAction("Move", true);
         playerLookAction = playerActionMap.FindAction("Look", true);
@@ -49,6 +59,17 @@ public class Player : MonoBehaviour
 
         cameraYaw = playerCamera.eulerAngles.y;
         cameraPitch = NormalizeAngle(playerCamera.eulerAngles.x);
+        CurrentMovementSpeed = playerWalkSpeed;
+
+        // PlayerManager may persist between scenes. Let it immediately apply
+        // any currently active movement blockers to this Player instance.
+        PlayerManager.Instance?.RefreshMovementState();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     private void Start()
@@ -101,8 +122,22 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, smoothTargetAngle, 0f);
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            playerCharacterController.Move(moveDirection.normalized * playerWalkSpeed * Time.deltaTime);
+            playerCharacterController.Move(moveDirection.normalized * CurrentMovementSpeed * Time.deltaTime);
         }
+    }
+
+    public void SetMovementEnabled(bool movementEnabled)
+    {
+        CurrentMovementSpeed = movementEnabled ? playerWalkSpeed : 0f;
+
+        if (!movementEnabled)
+        {
+            playerMoveAmount = Vector2.zero;
+            playerLookAmount = Vector2.zero;
+            animator?.SetFloat(MOVE_ANIM_PARAM, 0f);
+        }
+
+        enabled = movementEnabled;
     }
 
     private static float NormalizeAngle(float angle)

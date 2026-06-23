@@ -484,6 +484,8 @@ GameObject:
   - component: {fileID: 8941336115298435437}
   - component: {fileID: 7015415505014362142}
   - component: {fileID: 8535809474485314241}
+  - component: {fileID: 3057770907259704107}
+  - component: {fileID: 3567739904935200732}
   m_Layer: 5
   m_Name: UISubtitlePanel
   m_TagString: Untagged
@@ -619,6 +621,30 @@ MonoBehaviour:
   m_hasFocus: 1
   m_isFocusing: 1
   m_actorOverridingPanel: {fileID: 0}
+--- !u!114 &3057770907259704107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223852734444660797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17405e54a32f8db48b1235d959155173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3567739904935200732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223852734444660797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086a1221c4143734fbe0e933224f3f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7614101680039641463
 GameObject:
   m_ObjectHideFlags: 0
