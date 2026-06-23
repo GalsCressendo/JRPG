@@ -1569,6 +1569,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331200534778964864, guid: 1e270d16393401a42882ecdab7a25a70, type: 3}
+      propertyPath: typewriterStartsAutomatically
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7714923836622531022, guid: 1e270d16393401a42882ecdab7a25a70, type: 3}
       propertyPath: m_Name
       value: Dialogue Manager
