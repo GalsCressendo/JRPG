@@ -1180,6 +1180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: normal-woman-a
       objectReference: {fileID: 0}
+    - target: {fileID: 2183159074404969932, guid: 681791afc67318549952b3d0c02bb194, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a992bfcbfdfbca4da1cb05cee49859c, type: 2}
     - target: {fileID: 5866666021909216657, guid: 681791afc67318549952b3d0c02bb194, type: 3}
       propertyPath: m_Controller
       value: 
